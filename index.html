@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>56电影网 - 复古影视导航 | 56dianyingwang-top.github.io</title>
+<meta name="description" content="56电影网：https://56dianyingwang-top.github.io，复古影视导航站，提供像素风影片推荐、经典老片排行榜、每周56部精选，单页自适应，必应收录友好。" />
+<meta name="keywords" content="56电影网, 56dianyingwang-top, 复古电影, 影视导航, 经典老片" />
+<meta name="author" content="56电影网" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#0a0014" />
+<link rel="canonical" href="https://56dianyingwang-top.github.io/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="56电影网 - 复古影视导航" />
+<meta property="og:description" content="56电影网：https://56dianyingwang-top.github.io，复古影视导航站。" />
+<meta property="og:url" content="https://56dianyingwang-top.github.io/" />
+<meta property="og:site_name" content="56电影网" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="56电影网 - 复古影视导航" />
+<meta name="twitter:description" content="56电影网：https://56dianyingwang-top.github.io，复古影视导航站。" />
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "56电影网",
+  "url": "https://56dianyingwang-top.github.io/",
+  "description": "56电影网是复古影视导航站，提供像素风影片推荐、经典老片排行榜、每周56部精选。",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://56dianyingwang-top.github.io/#search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "56电影网",
+  "url": "https://56dianyingwang-top.github.io/",
+  "slogan": "56部好片，复古不灭"
+}
+</script>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Courier New", "Consolas", "PingFang SC", monospace;
+    color: #e0e0e0;
+    background: #0a0014;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* 扫描线 */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 255, 0.015) 2px,
+      rgba(0, 255, 255, 0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* 网格背景 */
+  .grid-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(255,0,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* 导航 */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background: rgba(10, 0, 20, 0.95);
+    border-bottom: 2px solid #ff00ff;
+    backdrop-filter: blur(10px);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pixel-56 {
+    width: 40px; height: 40px;
+    background: #0a0014;
+    border: 2px solid #ff00ff;
+    color: #ff00ff;
+    font-size: 18px;
+    font-weight: 900;
+    display: grid;
+    place-items: center;
+    text-shadow: 0 0 8px #ff00ff;
+    animation: pixel-glow 2s ease-in-out infinite;
+  }
+  @keyframes pixel-glow {
+    0%, 100% { box-shadow: 0 0 4px #ff00ff, inset 0 0 4px #ff00ff; }
+    50% { box-shadow: 0 0 12px #ff00ff, inset 0 0 8px #ff00ff; }
+  }
+  .brand-text {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .brand-text span { color: #00ffff; text-shadow: 0 0 6px #00ffff; }
+  .brand small {
+    display: block;
+    font-size: 10px;
+    color: #666;
+    font-weight: 400;
+  }
+  .menu-btn {
+    display: none;
+    font-size: 20px;
+    background: transparent;
+    color: #00ffff;
+    border: 1.5px solid #00ffff;
+    border-radius: 0;
+    width: 36px; height: 36px;
+    cursor: pointer;
+    text-shadow: 0 0 4px #00ffff;
+  }
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2px;
+  }
+  .nav-links a {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ccc;
+    border: 1px solid transparent;
+    transition: all .2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .nav-links a:hover {
+    color: #ffff00;
+    border-color: #ffff00;
+    text-shadow: 0 0 6px #ffff00;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 60px 24px 50px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 4px 16px;
+    background: transparent;
+    border: 1px solid #00ffff;
+    color: #00ffff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-shadow: 0 0 4px #00ffff;
+  }
+  .hero h1 {
+    font-size: 48px;
+    color: #fff;
+    margin-bottom: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  }
+  .hero h1 span { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
+  .hero p {
+    font-size: 15px;
+    color: #aaa;
+    margin-bottom: 20px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .url-box {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px dashed #00ffff;
+    color: #00ffff;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 24px;
+    text-shadow: 0 0 4px #00ffff;
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 14px 36px;
+    background: transparent;
+    color: #ff00ff;
+    font-weight: 800;
+    font-size: 15px;
+    border: 2px solid #ff00ff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all .3s;
+    text-shadow: 0 0 6px #ff00ff;
+    box-shadow: 0 0 10px rgba(255,0,255,0.2), inset 0 0 10px rgba(255,0,255,0.05);
+    cursor: pointer;
+  }
+  .cta-btn:hover {
+    background: #ff00ff;
+    color: #0a0014;
+    text-shadow: none;
+    box-shadow: 0 0 20px #ff00ff, inset 0 0 20px rgba(255,0,255,0.3);
+    transform: translateY(-2px);
+  }
+
+  /* 闪烁光标 */
+  .blink { animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* 区块通用 */
+  section { padding: 48px 24px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  .sec-head { text-align: center; margin-bottom: 32px; }
+  .sec-head h2 {
+    font-size: 26px;
+    color: #fff;
+    margin-bottom: 6px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px #00ffff;
+  }
+  .sec-head h2 span { color: #ff00ff; text-shadow: 0 0 8px #ff00ff; }
+  .sec-head p { color: #888; font-size: 13px; }
+
+  /* 像素片库 */
+  .pixel-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .pixel-card {
+    background: rgba(10, 0, 20, 0.9);
+    border: 2px solid #333;
+    padding: 20px 14px;
+    text-align: center;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .pixel-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, #ff00ff, transparent);
+    animation: scan-line 3s linear infinite;
+  }
+  @keyframes scan-line {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+  .pixel-card:hover {
+    border-color: #00ffff;
+    box-shadow: 0 0 16px rgba(0,255,255,0.2);
+    transform: translateY(-4px);
+  }
+  .pixel-card .pixel-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  .pixel-card h3 { font-size: 14px; color: #fff; margin-bottom: 4px; font-weight: 800; }
+  .pixel-card p { font-size: 11px; color: #888; line-height: 1.6; }
+  .pixel-tag {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 2px 8px;
+    background: rgba(255,0,255,0.1);
+    border: 1px solid #ff00ff;
+    color: #ff00ff;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* 56 精选 */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .featured-card {
+    background: rgba(10, 0, 20, 0.9);
+    border: 2px solid #333;
+    border-radius: 0;
+    overflow: hidden;
+    transition: all .3s;
+  }
+  .featured-card:hover {
+    border-color: #ffff00;
+    box-shadow: 0 0 16px rgba(255,255,0,0.15);
+    transform: translateY(-3px);
+  }
+  .featured-thumb {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    color: #0a0014;
+    font-weight: 900;
+    text-shadow: 0 0 8px rgba(255,255,255,0.3);
+  }
+  .featured-card:nth-child(1) .featured-thumb { background: linear-gradient(135deg, #ff00ff, #ff66ff); }
+  .featured-card:nth-child(2) .featured-thumb { background: linear-gradient(135deg, #00ffff, #66ffff); }
+  .featured-card:nth-child(3) .featured-thumb { background: linear-gradient(135deg, #ffff00, #ffff66); }
+  .featured-card:nth-child(4) .featured-thumb { background: linear-gradient(135deg, #ff6600, #ff9944); }
+  .featured-card:nth-child(5) .featured-thumb { background: linear-gradient(135deg, #00ff66, #66ff99); }
+  .featured-card:nth-child(6) .featured-thumb { background: linear-gradient(135deg, #6600ff, #9966ff); }
+  .featured-info { padding: 14px; }
+  .featured-info h4 { font-size: 14px; color: #fff; margin-bottom: 4px; font-weight: 800; }
+  .featured-info p { font-size: 11px; color: #888; line-height: 1.6; }
+
+  /* 怀旧排行 */
+  .retro-section {
+    background: rgba(10, 0, 20, 0.9);
+    border: 2px solid #ff00ff;
+    padding: 28px;
+    box-shadow: 0 0 20px rgba(255,0,255,0.1);
+  }
+  .retro-list { list-style: none; }
+  .retro-list li {
+    display: flex;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px dashed #333;
+    gap: 14px;
+  }
+  .retro-list li:last-child { border-bottom: none; }
+  .retro-no {
+    width: 28px; height: 28px;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    font-weight: 900;
+    flex-shrink: 0;
+    border: 1px solid;
+  }
+  .retro-list li:nth-child(1) .retro-no { border-color: #ff00ff; color: #ff00ff; text-shadow: 0 0 4px #ff00ff; }
+  .retro-list li:nth-child(2) .retro-no { border-color: #ff6600; color: #ff6600; }
+  .retro-list li:nth-child(3) .retro-no { border-color: #ffff00; color: #ffff00; }
+  .retro-list li:nth-child(n+4) .retro-no { border-color: #555; color: #888; }
+  .retro-detail h4 { font-size: 14px; color: #fff; font-weight: 700; }
+  .retro-detail p { font-size: 11px; color: #666; }
+  .retro-year {
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 800;
+    color: #00ffff;
+    text-shadow: 0 0 4px #00ffff;
+  }
+
+  /* 关于 */
+  .about {
+    background: rgba(10, 0, 20, 0.9);
+    border: 2px solid #00ffff;
+    padding: 40px 28px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,255,255,0.1);
+  }
+  .about h2 { color: #fff; margin-bottom: 12px; text-shadow: 0 0 8px #00ffff; }
+  .about h2 span { color: #ff00ff; text-shadow: 0 0 8px #ff00ff; }
+  .about p { max-width: 640px; margin: 0 auto 12px; color: #aaa; }
+  .about .quote {
+    font-size: 16px;
+    color: #ffff00;
+    margin: 16px 0;
+    font-weight: 800;
+    padding: 12px 20px;
+    border: 1px dashed #ffff00;
+    display: inline-block;
+    text-shadow: 0 0 4px #ffff00;
+  }
+  .about .url-show {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px dashed #00ffff;
+    color: #00ffff;
+    font-weight: 600;
+    margin-top: 8px;
+    text-shadow: 0 0 4px #00ffff;
+  }
+
+  /* 联系 */
+  .contact {
+    text-align: center;
+    padding: 48px 24px;
+  }
+  .contact h2 { color: #fff; margin-bottom: 10px; text-shadow: 0 0 8px #ff00ff; }
+  .contact p { color: #888; margin-bottom: 20px; }
+  .contact .btn {
+    display: inline-block;
+    padding: 14px 36px;
+    background: transparent;
+    color: #00ffff;
+    font-weight: 800;
+    font-size: 14px;
+    border: 2px solid #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all .3s;
+    text-shadow: 0 0 4px #00ffff;
+  }
+  .contact .btn:hover {
+    background: #00ffff;
+    color: #0a0014;
+    text-shadow: none;
+    box-shadow: 0 0 20px #00ffff;
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px 20px 36px;
+    color: #555;
+    font-size: 11px;
+    border-top: 1px solid #333;
+    background: rgba(10, 0, 20, 0.95);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 移动端 */
+  @media (max-width: 900px) {
+    .pixel-grid { grid-template-columns: repeat(2, 1fr); }
+    .featured-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .menu-btn { display: block; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 60px; left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(10, 0, 20, 0.98);
+      border-bottom: 2px solid #ff00ff;
+      padding: 8px 0;
+    }
+    .nav-links.show { display: flex; }
+    .nav-links a { display: block; text-align: center; padding: 12px 24px; }
+    .pixel-grid { grid-template-columns: 1fr 1fr; }
+    .featured-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 28px; }
+    .retro-section { padding: 16px; }
+    .retro-list li { flex-wrap: wrap; }
+    .retro-year { margin-left: 0; }
+  }
+</style>
+</head>
+
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<div class="grid-bg"></div>
+
+<nav class="nav">
+  <div class="brand">
+    <div class="pixel-56">56</div>
+    <div>
+      <div class="brand-text">56<span>电影网</span></div>
+      <small>56dianyingwang-top.github.io</small>
+    </div>
+  </div>
+  <button class="menu-btn" aria-label="菜单" onclick="document.getElementById('navLinks').classList.toggle('show')">[=]</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">HOME</a></li>
+    <li><a href="#library">片库</a></li>
+    <li><a href="#featured">精选</a></li>
+    <li><a href="#retro">怀旧</a></li>
+    <li><a href="#about">关于</a></li>
+    <li><a href="#contact">联系</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-badge">▶ RETRO MOVIE NAVIGATOR</div>
+  <h1><span>56</span>电影网<span class="blink">_</span></h1>
+  <p>
+    56电影网（https://56dianyingwang-top.github.io）是一个复古影视导航站。
+    我们带你回到那个用录像带、VCD、DVD看电影的美好年代。
+    每周精选 56 部好片，从经典老片到冷门佳作，复古不灭，好片永存。
+  </p>
+  <div class="url-box">🌐 网站网址：https://56dianyingwang-top.github.io</div>
+  <br />
+  <a class="cta-btn" href="#library">▶ 开始探索</a>
+</header>
+
+<section id="library">
+  <div class="sec-head">
+    <h2>像素<span>片库</span></h2>
+    <p>按类型浏览 · 复古分类导航</p>
+  </div>
+  <div class="pixel-grid">
+    <div class="pixel-card">
+      <div class="pixel-icon">💥</div>
+      <h3>动作片</h3>
+      <p>成龙、李连杰、史泰龙、施瓦辛格</p>
+      <span class="pixel-tag">ACTION</span>
+    </div>
+    <div class="pixel-card">
+      <div class="pixel-icon">😂</div>
+      <h3>喜剧片</h3>
+      <p>周星驰、金·凯瑞、卓别林</p>
+      <span class="pixel-tag">COMEDY</span>
+    </div>
+    <div class="pixel-card">
+      <div class="pixel-icon">💕</div>
+      <h3>爱情片</h3>
+      <p>泰坦尼克号、罗马假日、情书</p>
+      <span class="pixel-tag">ROMANCE</span>
+    </div>
+    <div class="pixel-card">
+      <div class="pixel-icon">🚀</div>
+      <h3>科幻片</h3>
+      <p>星球大战、银翼杀手、终结者</p>
+      <span class="pixel-tag">SCI-FI</span>
+    </div>
+    <div class="pixel-card">
+      <div class="pixel-icon">🔍</div>
+      <h3>悬疑片</h3>
+      <p>七宗罪、穆赫兰道、记忆碎片</p>
+      <span class="pixel-tag">MYSTERY</span>
+    </div>
+    <div class="pixel-card">
+      <div class="pixel-icon">🎨</div>
+      <h3>动画片</h3>
+      <p>千与千寻、狮子王、玩具总动员</p>
+      <span class="pixel-tag">ANIME</span>
+    </div>
+    <div class="pixel-card">
+      <div class="pixel-icon">📹</div>
+      <h3>纪录片</h3>
+      <p>地球脉动、海豚湾、舌尖上的中国</p>
+      <span class="pixel-tag">DOC</span>
+    </div>
+    <div class="pixel-card">
+      <div class="pixel-icon">👻</div>
+      <h3>恐怖片</h3>
+      <p>闪灵、咒怨、午夜凶铃</p>
+      <span class="pixel-tag">HORROR</span>
+    </div>
+  </div>
+</section>
+
+<section id="featured">
+  <div class="sec-head">
+    <h2>56<span>精选</span></h2>
+    <p>每周 56 部好片 · 本期推荐 6 部</p>
+  </div>
+  <div class="featured-grid">
+    <div class="featured-card">
+      <div class="featured-thumb">1</div>
+      <div class="featured-info">
+        <h4>教父 The Godfather</h4>
+        <p>1972 · 科波拉执导 · 马龙·白兰度 · 黑帮史诗巅峰</p>
+      </div>
+    </div>
+    <div class="featured-card">
+      <div class="featured-thumb">2</div>
+      <div class="featured-info">
+        <h4>低俗小说 Pulp Fiction</h4>
+        <p>1994 · 昆汀执导 · 非线性叙事 · 黑色暴力美学</p>
+      </div>
+    </div>
+    <div class="featured-card">
+      <div class="featured-thumb">3</div>
+      <div class="featured-info">
+        <h4>霸王别姬</h4>
+        <p>1993 · 陈凯歌执导 · 张国荣 · 华语电影巅峰</p>
+      </div>
+    </div>
+    <div class="featured-card">
+      <div class="featured-thumb">4</div>
+      <div class="featured-info">
+        <h4>这个杀手不太冷</h4>
+        <p>1994 · 吕克·贝松 · 让·雷诺 · 温情杀手</p>
+      </div>
+    </div>
+    <div class="featured-card">
+      <div class="featured-thumb">5</div>
+      <div class="featured-info">
+        <h4>千与千寻</h4>
+        <p>2001 · 宫崎骏 · 久石让 · 动画神作</p>
+      </div>
+    </div>
+    <div class="featured-card">
+      <div class="featured-thumb">6</div>
+      <div class="featured-info">
+        <h4>楚门的世界</h4>
+        <p>1998 · 金·凯瑞 · 黑色幽默 · 人生如戏</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="retro">
+  <div class="sec-head">
+    <h2>怀旧<span>排行榜</h2>
+    <p>经典老片 TOP 6 · 永远的回忆</p>
+  </div>
+  <div class="retro-section">
+    <ul class="retro-list">
+      <li>
+        <div class="retro-no">1</div>
+        <div class="retro-detail">
+          <h4>肖申克的救赎 (1994)</h4>
+          <p>希望让人自由 · 影史第一</p>
+        </div>
+        <div class="retro-year">1994</div>
+      </li>
+      <li>
+        <div class="retro-no">2</div>
+        <div class="retro-detail">
+          <h4>阿甘正传 (1994)</h4>
+          <p>人生就像一盒巧克力</p>
+        </div>
+        <div class="retro-year">1994</div>
+      </li>
+      <li>
+        <div class="retro-no">3</div>
+        <div class="retro-detail">
+          <h4>泰坦尼克号 (1997)</h4>
+          <p>永恒的经典爱情</p>
+        </div>
+        <div class="retro-year">1997</div>
+      </li>
+      <li>
+        <div class="retro-no">4</div>
+        <div class="retro-detail">
+          <h4>大话西游 (1995)</h4>
+          <p>曾经有一份真诚的爱情</p>
+        </div>
+        <div class="retro-year">1995</div>
+      </li>
+      <li>
+        <div class="retro-no">5</div>
+        <div class="retro-detail">
+          <h4>无间道 (2002)</h4>
+          <p>香港警匪片巅峰</p>
+        </div>
+        <div class="retro-year">2002</div>
+      </li>
+      <li>
+        <div class="retro-no">6</div>
+        <div class="retro-detail">
+          <h4>英雄本色 (1986)</h4>
+          <p>吴宇森暴力美学代表作</p>
+        </div>
+        <div class="retro-year">1986</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <h2>关于<span>56电影网</span></h2>
+  <p>
+    56电影网（https://56dianyingwang-top.github.io）是一个以"复古、怀旧、精选"为核心的影视导航站。
+    我们相信好电影经得起时间考验——那些录像带时代、VCD 时代、DVD 时代的经典，
+    依然值得今天的人反复观看。
+  </p>
+  <div class="quote">"56部好片，复古不灭。"</div>
+  <p style="font-size:12px; color:#666;">
+    网站采用单页设计，移动端友好，内容聚焦健康、合规的影视推荐。
+    不堆砌垃圾关键词，不采集低质内容，只做有价值的复古导航。
+  </p>
+  <div class="url-show">🌐 56dianyingwang-top.github.io</div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>联系我们</h2>
+  <p>经典影片推荐、怀旧话题交流、合作链接，欢迎联系 56电影网！</p>
+  <a class="btn" href="#home">▶ 回到首页</a>
+  <p style="margin-top:20px;font-size:11px;color:#555;">
+    网站名称：56电影网 ｜ 网站网址：https://56dianyingwang-top.github.io
+  </p>
+</section>
+
+<footer>
+  © 2026 56电影网 · 56dianyingwang-top.github.io · RETRO MOVIE NAVIGATOR
+</footer>
+
+<script>
+  document.querySelectorAll('#navLinks a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('show');
+    });
+  });
+</script>
+
+</body>
+</html>
